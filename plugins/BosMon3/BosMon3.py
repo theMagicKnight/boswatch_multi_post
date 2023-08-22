@@ -149,7 +149,7 @@ def run(typ,freq,data):
 							info = info + 4      # + b0100
 						# "I" is nothing to do     + b0000
 
-						params = urllib.urlencode({'type':'fms', 'address':data["fms"], 'status':data["status"], 'info':info, 'flags':'0'})
+						params = urllib.urlencode({'type':'fms', 'address':data["fms"], 'status':int(data["status"],16), 'info':info, 'flags':'0'})
 						logging.debug(" - Params: %s", params)
 						# dispatch the BosMon3-request
 						BosMon3Request(httprequest, params, headers)
@@ -161,7 +161,7 @@ def run(typ,freq,data):
 				elif typ == "ZVEI":
 					logging.debug("Start ZVEI to BosMon3")
 					try:
-						params = urllib.urlencode({'type':'zvei', 'address':data["zvei"], 'flags':'0'})
+						params = urllib.urlencode({'type':'zveidtmf', 'address':data["zvei"], 'flags':'0'})
 						logging.debug(" - Params: %s", params)
 						# dispatch the BosMon3-request
 						BosMon3Request(httprequest, params, headers)
